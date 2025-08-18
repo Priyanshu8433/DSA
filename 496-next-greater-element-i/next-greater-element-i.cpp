@@ -1,31 +1,32 @@
 class Solution {
-    int lSearch(int x, vector<int> &v){
-        for(int i=0; i<v.size(); i++){
-            if(v[i]==x) return i;
-        }
-        return -1;
-    }
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         int m=nums1.size();
         int n=nums2.size();
-
-        vector<int> res(m);
+        unordered_map<int,int> mp;
         for(int i=0; i<m; i++){
-            int x=nums1[i];
-            int idx=lSearch(x,nums2);
+            mp[nums1[i]]=i;
+        }
+        stack<int> s;
+        vector<int> res(m);
 
-            bool flag=false;
+        for(int i=n-1; i>=0; i--){
+            int x=nums2[i];
+            if(mp.find(x)!=mp.end()){
+                while(!s.empty() && s.top()<x){
+                    s.pop();
+                }
 
-            for(int j=idx+1; j<n; j++){
-                if(nums2[j]>x){
-                    flag=true;
-                    res[i]=nums2[j];
-                    break;
+                if(s.empty()){
+                    nums1[mp[x]]=-1;
+                }
+                else{
+                    nums1[mp[x]]=s.top();
                 }
             }
-            if(!flag) res[i]=-1;
+            s.push(nums2[i]);
         }
-        return res;
+
+        return nums1;
     }
 };
