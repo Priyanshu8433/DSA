@@ -9,7 +9,10 @@ public:
 
         //s1 cuts s2
         for(int i=0; i<n; i++){
-            if(s1[i]<s2[i]) flag=false;
+            if(s1[i]<s2[i]){
+                flag=false;
+                break;
+            }
         }
 
         if(flag) return true;
@@ -18,7 +21,10 @@ public:
         
         //s2 cuts s1
         for(int i=0; i<n; i++){
-            if(s2[i]<s1[i]) flag=false;
+            if(s2[i]<s1[i]){
+                flag=false;
+                break;
+            } 
         }
 
         if(flag) return true;
