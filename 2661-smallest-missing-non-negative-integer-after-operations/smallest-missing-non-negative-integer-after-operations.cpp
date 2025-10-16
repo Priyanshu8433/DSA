@@ -15,22 +15,21 @@ public:
             }
         }
 
-        int maxi=INT_MAX;
+        int mini=INT_MAX;
         int key=INT_MAX;
 
         // find the minimum module count
         for(auto it: mp){
-            maxi=min(maxi,it.second);
+            mini=min(mini,it.second);
         }
 
         // find the minimum key with the minimum modulo count
         for(auto it: mp){
-            if(maxi==it.second){
+            if(mini==it.second){
                 key=min(key,it.first);
             }
         }
 
-
-        return value*maxi+key;
+        return value*mini+key;
     }
 };
