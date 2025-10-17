@@ -25,9 +25,19 @@ public:
         int m=board.size();
         int n=board[0].size();
         vector<vector<bool>> vis(m,vector<bool>(n,false));
+        unordered_set<char> st;
+
+        for(char ch: word) st.insert(ch);
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(!st.count(board[i][j])) vis[i][j]=true;
+            }
+        }
+
 
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
+                
                 if(board[i][j]==word[0]){
                     //start pattern matching
                     if(solve(i,j,0,board,word,vis)) return true;
