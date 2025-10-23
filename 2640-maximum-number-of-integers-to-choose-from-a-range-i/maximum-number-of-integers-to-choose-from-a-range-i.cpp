@@ -9,10 +9,13 @@ public:
         int length=0;
         int sum=0;
         for(int i=1; i<=n; i++){
-            if(i+sum<=maxSum && st.count(i)==0){
-                length++;
-                sum+=i;
+            if(i+sum<=maxSum){
+                if(st.count(i)==0){
+                    length++;
+                    sum+=i;
+                }
             }
+            else break;            
         }
         return length;
     }
