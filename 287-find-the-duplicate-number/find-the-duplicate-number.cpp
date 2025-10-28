@@ -2,17 +2,22 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         int n=nums.size();
+        int slow=0;
+        int fast=0;
 
-        // Without extra space but modified the array. hmm.... How do I improve
-        for(int i=0; i<n; i++){
-            int idx=abs(nums[i])-1;
-            if(nums[idx]<0){
-                nums[idx]*=-1;
-                return idx+1;
-            }
-            nums[idx]*=-1;
+        do{
+            slow=nums[slow];
+            fast=nums[fast];
+            fast=nums[fast];
+        }while(slow!=fast);
+        
+        slow=0;
+
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
         }
 
-        return -1;
+        return slow;
     }
 };
