@@ -3,6 +3,7 @@ public:
     int findDuplicate(vector<int>& nums) {
         int n=nums.size();
 
+        // Without extra space but modified the array. hmm.... How do I improve
         for(int i=0; i<n; i++){
             int idx=abs(nums[i])-1;
             if(nums[idx]<0){
