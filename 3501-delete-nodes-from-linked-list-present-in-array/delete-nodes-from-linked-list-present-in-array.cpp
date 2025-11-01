@@ -20,29 +20,12 @@ public:
         while(q){
             if(st.count(q->val)){
                 //delete the node
-                if(!p){
-                    //head node
-                    head=r;
-                    // delete(q);
-                    q=r;
-                    if(r)
-                        r=r->next;
-                }
-                else{
-                    p->next=r;
-                    // delete(q);
-                    q=r;
-                    if(r)
-                        r=r->next;
-                }
+                if(!p) head=r;
+                else p->next=r;
             }
-            else{
-                //keep the node
-                p=q;
-                q=r;
-                if(r)
-                    r=r->next;
-            }
+            else p=q;
+            q=r;
+            if(r) r=r->next;
         }
         return head;
     }
