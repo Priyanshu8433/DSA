@@ -1,7 +1,7 @@
 class NumMatrix {
     vector<vector<int>> mat;
 public:
-    NumMatrix(vector<vector<int>>& matrix): mat(matrix) {
+    NumMatrix(vector<vector<int>>& mat){
         int m=mat.size();
         int n=mat[0].size();
         // column summation
@@ -16,6 +16,7 @@ public:
                 mat[i][j]+=mat[i][j-1];
             }
         }
+        this->mat=mat;
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
