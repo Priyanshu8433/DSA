@@ -23,9 +23,7 @@ public:
                 }
             }
         }
-        if(flag || nCnt%2==0){
-            return nSum+pSum;
-        }
+        if(flag || nCnt%2==0) return nSum+pSum;
         return nSum+pSum-2*mini;
     }
 };
