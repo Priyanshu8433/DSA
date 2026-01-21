@@ -11,15 +11,11 @@
 class Solution {
 public:
     ListNode* findMiddle(ListNode* head){
-        ListNode* fast=head,*slow=head;
-
+        ListNode* slow=head,*fast=slow->next;
+        
         while(fast && fast->next){
-            fast=fast->next;
-
-            if(fast->next){
-                slow=slow->next;
-                fast=fast->next;
-            }
+            slow=slow->next;
+            fast=fast->next->next;
         }
         return slow;
     }
