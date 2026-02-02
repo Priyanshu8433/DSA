@@ -58,14 +58,12 @@ public:
                             q.push({{adjRow,adjCol},moves+1});
                             if(adjRow==lastRow && adjCol==lastCol) return moves+1;
                             vis[adjRow][adjCol]=1;
-                            cout<<adjRow<<" "<<adjCol<<":"<<moves+1<<"--"<<nextPos<<endl;
                         }
                     }
                     else{
                         if(!vis[nRow][nCol]){
                             q.push({{nRow,nCol},moves+1});
                             vis[nRow][nCol]=1;
-                            cout<<nRow<<" "<<nCol<<":"<<moves+1<<endl;
                         }
                     }
                 }
