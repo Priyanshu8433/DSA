@@ -1,20 +1,28 @@
 class Solution {
-    int solve(int i, int target, vector<int> &nums, vector<vector<int>> &dp){
-        if(i>=nums.size()){
+public:
+    int helper(int idx, vector<int>& nums, int target, vector<vector<int>> &dp){
+        int n=nums.size();
+        if(idx>=n){
             if(target==0) return 1;
             return 0;
         }
 
-        if(dp[i][target+2000]!=-1) return dp[i][target+2000];
+        if(dp[idx][target+2000]!=-1) return dp[idx][target+2000];
 
-        int add=solve(i+1,target-nums[i],nums,dp);
-        int subtract=solve(i+1,target+nums[i],nums,dp);
+        // add to expression
+        int add=helper(idx+1,nums,target-nums[idx],dp);
 
-        return dp[i][target+2000]=add+subtract;
+        // subtract from expression
+        int subtract=helper(idx+1,nums,target+nums[idx],dp);
+
+        return dp[idx][target+2000]=add+subtract;
     }
-public:
+
     int findTargetSumWays(vector<int>& nums, int target) {
-        vector<vector<int>> dp(nums.size(),vector<int>(4000,-1));
-        return solve(0,target,nums,dp);
+        int n=nums.size();
+        int sum=accumulate(nums.begin(),nums.end(),0);
+        int m=abs(target)+sum;
+        vector<vector<int>> dp(n,vector<int>(4000,-1));
+        return helper(0,nums,target,dp);
     }
 };
