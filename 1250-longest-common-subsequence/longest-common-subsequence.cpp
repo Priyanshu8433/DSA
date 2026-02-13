@@ -1,24 +1,22 @@
 class Solution {
-public:
-    int helper(int i, int j, string &text1, string &text2, vector<vector<int>> &dp){
-        if(i>=text1.size() || j>=text2.size()) return 0;
-
-        if(dp[i][j]!=-1) return dp[i][j];
-
-        if(text1[i]==text2[j]){
-            int moveBoth=helper(i+1,j+1,text1,text2,dp)+1;
-            return dp[i][j]=moveBoth;
-        }
-        else{
-            int moveLeft=helper(i+1,j,text1,text2,dp);
-            int moveRight=helper(i,j+1,text1,text2,dp);
-
-            return dp[i][j]=max(moveLeft,moveRight);
-        }
-    }
-
+public: 
     int longestCommonSubsequence(string text1, string text2) {
-        vector<vector<int>> dp(text1.size(),vector<int>(text2.size(),-1));
-        return helper(0,0,text1,text2,dp);
+        vector<int> prev(text2.size()+1,0),curr(text2.size()+1,0);
+
+        for(int i=1; i<=text1.size(); i++){
+            for(int j=1; j<=text2.size(); j++){
+                if(text1[i-1]==text2[j-1]){
+                    curr[j]=prev[j-1]+1;
+                }
+                else{
+                    int left=prev[j];
+                    int right=curr[j-1];
+                    curr[j]=max(left,right);
+                }
+            }
+            prev=curr;
+        }
+
+        return prev[text2.size()];
     }
 };
