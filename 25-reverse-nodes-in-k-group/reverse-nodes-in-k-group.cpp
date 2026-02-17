@@ -10,33 +10,45 @@
  */
 class Solution {
 public:
+    ListNode* reverse(ListNode* curr, ListNode *prev){
+        if(!curr) return prev;
+
+        ListNode* nextNode=curr->next;
+        curr->next=prev;
+        return reverse(nextNode,curr);
+    }
+
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode *oPrev=NULL,*start=head,*last=head;
+        ListNode *subHead=head,*subTail=head;
+        ListNode *prevTail=NULL;
 
-        while(last){
-            int temp=k;
-            while(last && temp>0){
-                last=last->next;
-                temp--;
-            }
-            if(temp!=0){
-                cout<<temp;
-                return head;
+        while(subTail){
+            int t=k-1;
+
+            while(subTail && t>0){
+                subTail=subTail->next;
+                t--;
             }
 
-            // reverse now
-            ListNode *curr=start,*prev=last;
-            while(curr!=last){
-                ListNode* next=curr->next;
-                curr->next=prev;
-                prev=curr;
-                curr=next;
+            if(t>0 || !subTail) break;
+
+            ListNode *nextHead=subTail->next;
+            subTail->next=NULL;
+
+            ListNode *revHead=reverse(subHead,NULL);
+
+            if(prevTail==NULL){
+                head=revHead;
             }
-            if(!oPrev) head=prev;
-            else oPrev->next=prev;
-            oPrev=start;
-            start=last;
+            else{
+                prevTail->next=revHead;
+            }
+            subHead->next=nextHead;
+            prevTail=subHead;
+            subHead=nextHead;
+            subTail=nextHead;
         }
+
         return head;
     }
 };
